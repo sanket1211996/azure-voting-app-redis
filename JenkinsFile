@@ -55,5 +55,29 @@ pipeline {
             }
          }
       }
+      stage('Container Scanning') {
+         parallel {
+            stage('Run Anchore') {
+               sleep(time: 1, unit: 'SECONDS')
+               // steps {
+               //    pwsh(script: """
+               //       Write-Output "blackdentech/jenkins-course" > anchore_images
+               //    """)
+               //    anchore bailOnFail: false, bailOnPluginFail: false, name: 'anchore_images'
+               // }
+            }
+            stage('Run Trivy') {
+               steps {
+                  sh(script: """
+                     trivy sdarwant/jenkins-course
+                  """)
+               }
+            }
+         }
+      }
+
+
+
+
     }
 }
