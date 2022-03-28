@@ -58,7 +58,9 @@ pipeline {
       stage('Container Scanning') {
          parallel {
             stage('Run Anchore') {
-               sleep(time: 1, unit: 'SECONDS')
+               steps {
+                  sleep(time: 1, unit: 'SECONDS')
+               }
                // steps {
                //    pwsh(script: """
                //       Write-Output "blackdentech/jenkins-course" > anchore_images
